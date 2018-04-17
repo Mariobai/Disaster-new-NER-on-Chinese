@@ -1,0 +1,40 @@
+"backend: tensorflow\nclass_name: Model\nconfig:\n  input_layers:\n  - [emb, 0, 0]\n\
+  \  layers:\n  - class_name: InputLayer\n    config:\n      batch_input_shape: !!python/tuple\
+  \ [null, 10]\n      dtype: float32\n      name: emb\n      sparse: false\n    inbound_nodes:\
+  \ []\n    name: emb\n  - class_name: Embedding\n    config:\n      activity_regularizer:\
+  \ null\n      batch_input_shape: !!python/tuple [null, null]\n      dtype: float32\n\
+  \      embeddings_constraint: null\n      embeddings_initializer:\n        class_name:\
+  \ RandomUniform\n        config: {maxval: 0.05, minval: -0.05, seed: null}\n   \
+  \   embeddings_regularizer: null\n      input_dim: 66070\n      input_length: null\n\
+  \      mask_zero: false\n      name: embedding_1\n      output_dim: 128\n      trainable:\
+  \ true\n    inbound_nodes:\n    - - - emb\n        - 0\n        - 0\n        - {}\n\
+  \    name: embedding_1\n  - class_name: Bidirectional\n    config:\n      layer:\n\
+  \        class_name: GRU\n        config:\n          activation: tanh\n        \
+  \  activity_regularizer: null\n          bias_constraint: null\n          bias_initializer:\n\
+  \            class_name: Zeros\n            config: {}\n          bias_regularizer:\
+  \ null\n          dropout: 0.1\n          go_backwards: false\n          implementation:\
+  \ 1\n          kernel_constraint: null\n          kernel_initializer:\n        \
+  \    class_name: VarianceScaling\n            config: {distribution: uniform, mode:\
+  \ fan_avg, scale: 1.0, seed: null}\n          kernel_regularizer: null\n       \
+  \   name: gru_1\n          recurrent_activation: hard_sigmoid\n          recurrent_constraint:\
+  \ null\n          recurrent_dropout: 0.0\n          recurrent_initializer:\n   \
+  \         class_name: Orthogonal\n            config: {gain: 1.0, seed: null}\n\
+  \          recurrent_regularizer: null\n          return_sequences: true\n     \
+  \     return_state: false\n          stateful: false\n          trainable: true\n\
+  \          units: 128\n          unroll: false\n          use_bias: true\n     \
+  \ merge_mode: concat\n      name: bidirectional_1\n      trainable: true\n    inbound_nodes:\n\
+  \    - - - embedding_1\n        - 0\n        - 0\n        - {}\n    name: bidirectional_1\n\
+  \  - class_name: Flatten\n    config: {name: flatten_1, trainable: true}\n    inbound_nodes:\n\
+  \    - - - bidirectional_1\n        - 0\n        - 0\n        - {}\n    name: flatten_1\n\
+  \  - class_name: Dropout\n    config: {name: dropout_1, noise_shape: null, rate:\
+  \ 0.5, seed: null, trainable: true}\n    inbound_nodes:\n    - - - flatten_1\n \
+  \       - 0\n        - 0\n        - {}\n    name: dropout_1\n  - class_name: Dense\n\
+  \    config:\n      activation: softmax\n      activity_regularizer: null\n    \
+  \  bias_constraint: null\n      bias_initializer:\n        class_name: Zeros\n \
+  \       config: {}\n      bias_regularizer: null\n      kernel_constraint: null\n\
+  \      kernel_initializer:\n        class_name: VarianceScaling\n        config:\
+  \ {distribution: uniform, mode: fan_avg, scale: 1.0, seed: null}\n      kernel_regularizer:\
+  \ null\n      name: dense_1\n      trainable: true\n      units: 4\n      use_bias:\
+  \ true\n    inbound_nodes:\n    - - - dropout_1\n        - 0\n        - 0\n    \
+  \    - {}\n    name: dense_1\n  name: model_1\n  output_layers:\n  - [dense_1, 0,\
+  \ 0]\nkeras_version: 2.1.4\n"
