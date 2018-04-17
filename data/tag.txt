@@ -1,0 +1,4 @@
+LOC  0
+TIME  1
+DIS  2
+O  3
